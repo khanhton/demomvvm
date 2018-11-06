@@ -1,6 +1,5 @@
 package mvvm.bsv.vn.basemvvm.ui;
 
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
@@ -8,11 +7,9 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
 import butterknife.ButterKnife;
 import io.reactivex.disposables.CompositeDisposable;
 import mvvm.bsv.vn.basemvvm.MainActivity;
-import mvvm.bsv.vn.basemvvm.databinding.LoginLayoutBinding;
 import mvvm.bsv.vn.basemvvm.utils.LogUtil;
 
 public abstract class BaseFragment  extends Fragment {
@@ -24,8 +21,6 @@ public abstract class BaseFragment  extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.mMainActivity = (MainActivity) getActivity();
-
-
     }
 
     @Override
