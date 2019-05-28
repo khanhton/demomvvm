@@ -1,17 +1,18 @@
 package mvvm.bsv.vn.basemvvm.ui;
 
+import android.arch.lifecycle.Observer;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.Toast;
 
 import butterknife.ButterKnife;
+import mvvm.bsv.vn.basemvvm.BR;
 import mvvm.bsv.vn.basemvvm.R;
-import mvvm.bsv.vn.basemvvm.databinding.LoginLayoutBinding;
 import mvvm.bsv.vn.basemvvm.modelview.LoginModelView;
-import mvvm.bsv.vn.basemvvm.utils.LogUtil;
-import mvvm.bsv.vn.basemvvm.view.LoginView;
 
-public class LoginFragment extends BaseMVVMFragment<LoginModelView> implements LoginView {
+public class LoginFragment extends BaseMVVMFragment<LoginModelView>{
 
     public static LoginFragment newInstance() {
 
@@ -24,19 +25,33 @@ public class LoginFragment extends BaseMVVMFragment<LoginModelView> implements L
 
     @Override
     protected LoginModelView createModelView() {
-        return new LoginModelView(this);
+        return new LoginModelView();
     }
+
+    @Override
+    protected int getIDVariableBinding() {
+        return BR.vm;
+    }
+
+    @Override
+    protected void setupObserveModelView(LoginModelView mvvmModelView) {
+        mvvmModelView.getOnLoginSuccessed().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(@Nullable String s) {
+                Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+    }
+
 
     @Override
     protected void init(View view) {
     }
 
     @Override
-    public View getRootLayout() {
-        LoginLayoutBinding loginLayoutBinding = DataBindingUtil.inflate(getActivity().getLayoutInflater(), R.layout.login_layout,null, false);
-        LoginModelView loginModelView = new LoginModelView(this);
-        loginLayoutBinding.setVm(loginModelView);
-        return loginLayoutBinding.getRoot();
+    public int getRootLayout() {
+        return  R.layout.login_layout;
     }
 
     @Override
@@ -44,9 +59,4 @@ public class LoginFragment extends BaseMVVMFragment<LoginModelView> implements L
         ButterKnife.bind(this, view);
     }
 
-    @Override
-    public void gotoMain(String message) {
-        LogUtil.log("Go to main: "+message);
-        showSnackbar("Login successed!");
-    }
 }

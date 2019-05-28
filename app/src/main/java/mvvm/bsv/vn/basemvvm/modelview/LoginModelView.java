@@ -2,33 +2,41 @@ package mvvm.bsv.vn.basemvvm.modelview;
 
 import android.databinding.ObservableField;
 
-import mvvm.bsv.vn.basemvvm.model.UsersRepository;
+import mvvm.bsv.vn.basemvvm.api.DataManager;
 import mvvm.bsv.vn.basemvvm.models.LoginResponse;
 import mvvm.bsv.vn.basemvvm.models.User;
+import mvvm.bsv.vn.basemvvm.rx.SingleLiveEvent;
 import mvvm.bsv.vn.basemvvm.utils.StringUtil;
-import mvvm.bsv.vn.basemvvm.view.LoginView;
-import mvvm.bsv.vn.basemvvm.notifimodelview.LoginNotifiModelview;
 
-public class LoginModelView extends BaseModelView<LoginView, UsersRepository> implements LoginNotifiModelview {
+public class LoginModelView extends BaseModelView {
 
     public final ObservableField<String> username = new ObservableField<>();
     public final ObservableField<String> password = new ObservableField<>();
 
-    public  LoginModelView(LoginView loginNavigator){
-       this.mvvmNavigator = loginNavigator;
-       this.baseRepository = new UsersRepository(this);
-    }
+    public final SingleLiveEvent<String> onLoginSuccessed = new SingleLiveEvent<>();
 
     public void login(){
         if (StringUtil.isEmpty(username.get()) || StringUtil.isEmpty(password.get())){
-            mvvmNavigator.loadAPIError("User name and password is required");
+            onLoadAPIError.setValue("User name and password is required");
         }else{
-            baseRepository.login(new User(username.get(), password.get()));
+            login(new User(username.get(), password.get()));
         }
     }
 
-    @Override
-    public void loginSussessed(LoginResponse loginResponse) {
-        mvvmNavigator.gotoMain(loginResponse.getTitle());
+
+    public SingleLiveEvent<String> getOnLoginSuccessed() {
+        return onLoginSuccessed;
     }
+
+    public void login(User user) {
+        showLoading();
+        addSubscription(DataManager.getInstall().login(user.getUsername(), user.getPassword()), loginReponse -> {
+            hideLoading();
+            onLoginSuccessed.setValue(((LoginResponse) loginReponse).getTitle());
+        }, throwable -> {
+            hideLoading();
+            loadAPIFail(throwable);
+        });
+    }
+
 }
