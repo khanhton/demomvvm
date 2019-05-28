@@ -2,8 +2,6 @@ package mvvm.bsv.vn.basemvvm.ui;
 
 import android.os.Bundle;
 import android.view.View;
-
-import butterknife.ButterKnife;
 import mvvm.bsv.vn.basemvvm.R;
 
 /**
@@ -29,10 +27,5 @@ public class MainTabHostFragment extends BaseFragment {
     @Override
     public int getRootLayout() {
         return R.layout.main_tab_host_layout;
-    }
-
-    @Override
-    public void bindView(View view) {
-        ButterKnife.bind(this, view);
     }
 }

@@ -30,7 +30,6 @@ public abstract class BaseFragment  extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         ButterKnife.bind(this, view);
-        bindView(view);
         init(view);
         setupActionBar();
     }
@@ -38,8 +37,6 @@ public abstract class BaseFragment  extends Fragment {
     protected abstract void init(View view);
 
     public abstract int getRootLayout();
-
-    public abstract void bindView(View view);
 
     public void setupActionBar() {
     }

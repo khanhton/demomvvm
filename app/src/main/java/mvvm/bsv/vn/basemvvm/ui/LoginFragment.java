@@ -1,18 +1,21 @@
 package mvvm.bsv.vn.basemvvm.ui;
 
 import android.arch.lifecycle.Observer;
-import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import butterknife.ButterKnife;
+import butterknife.BindView;
 import mvvm.bsv.vn.basemvvm.BR;
 import mvvm.bsv.vn.basemvvm.R;
 import mvvm.bsv.vn.basemvvm.modelview.LoginModelView;
 
 public class LoginFragment extends BaseMVVMFragment<LoginModelView>{
+
+    @BindView(R.id.tvTitle)
+    TextView tvTitle;
 
     public static LoginFragment newInstance() {
 
@@ -48,16 +51,13 @@ public class LoginFragment extends BaseMVVMFragment<LoginModelView>{
 
     @Override
     protected void init(View view) {
+        tvTitle.setText("MVVM");
+        mvvmModelView.username.set("xyz");
     }
 
     @Override
     public int getRootLayout() {
         return  R.layout.login_layout;
-    }
-
-    @Override
-    public void bindView(View view) {
-        ButterKnife.bind(this, view);
     }
 
 }
