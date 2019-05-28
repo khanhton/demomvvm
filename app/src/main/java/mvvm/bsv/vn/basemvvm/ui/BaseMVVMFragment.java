@@ -5,8 +5,6 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.View;
-
-import mvvm.bsv.vn.basemvvm.BR;
 import mvvm.bsv.vn.basemvvm.modelview.BaseModelView;
 
 public abstract class BaseMVVMFragment <M extends BaseModelView> extends BaseFragment{
@@ -28,7 +26,6 @@ public abstract class BaseMVVMFragment <M extends BaseModelView> extends BaseFra
 
     protected abstract M createModelView();
     protected abstract int getIDVariableBinding();
-
     protected abstract void setupObserveModelView(M mvvmModelView);
 
     @Override
@@ -40,7 +37,7 @@ public abstract class BaseMVVMFragment <M extends BaseModelView> extends BaseFra
         }
     }
 
-    protected void setupObserveModelViewBase(){
+    private void setupObserveModelViewBase(){
         mvvmModelView.getOnLoadAPIFail().observe(this, new Observer<Throwable>() {
             @Override
             public void onChanged(@Nullable Throwable throwable) {

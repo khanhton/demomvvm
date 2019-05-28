@@ -60,6 +60,9 @@ public abstract class BaseModelView   extends BaseObservable {
             mCompositeDisposable.clear();
             mCompositeDisposable = null;
         }
+        if(mCompositeDisposable != null && !mCompositeDisposable.isDisposed()){
+            mCompositeDisposable.dispose();
+        }
     }
 
     public void addSubscription(Observable observable, Consumer success, Consumer<? super Throwable> throwable) {

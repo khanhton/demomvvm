@@ -8,14 +8,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import butterknife.ButterKnife;
-import io.reactivex.disposables.CompositeDisposable;
 import mvvm.bsv.vn.basemvvm.MainActivity;
 import mvvm.bsv.vn.basemvvm.utils.LogUtil;
 
 public abstract class BaseFragment  extends Fragment {
 
     protected MainActivity mMainActivity;
-    CompositeDisposable disposable;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -59,13 +57,6 @@ public abstract class BaseFragment  extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (disposable != null && !disposable.isDisposed())
-            disposable.dispose();
     }
 
     @Override

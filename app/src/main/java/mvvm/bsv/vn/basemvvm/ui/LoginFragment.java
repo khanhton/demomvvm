@@ -39,6 +39,7 @@ public class LoginFragment extends BaseMVVMFragment<LoginModelView>{
             @Override
             public void onChanged(@Nullable String s) {
                 Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
+                mMainActivity.replaceFragment(MainTabHostFragment.newInstance());
             }
         });
 
