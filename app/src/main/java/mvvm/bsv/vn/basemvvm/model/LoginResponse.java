@@ -2,7 +2,7 @@ package mvvm.bsv.vn.basemvvm.model;
 
 import com.google.gson.annotations.SerializedName;
 
-public class LoginResponse {
+public class LoginResponse extends BaseResponse{
     @SerializedName("userId")
     int userId;
     @SerializedName("id")

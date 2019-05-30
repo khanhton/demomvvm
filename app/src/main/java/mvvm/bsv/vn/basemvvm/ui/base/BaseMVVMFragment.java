@@ -8,36 +8,31 @@ public abstract class BaseMVVMFragment <M extends BaseModelView> extends BaseFra
     protected M mvvmModelView;
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public void onViewCreated(View view, Bundle savedInstanceState) {
         mvvmModelView = createModelView();
+        DataBindingUtil.bind(view).setVariable(getIDVariableBinding(), mvvmModelView);
         setupObserveModelViewBase();
         setupObserveModelView(mvvmModelView);
+        super.onViewCreated(view, savedInstanceState);
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        DataBindingUtil.bind(view).setVariable(getIDVariableBinding(), mvvmModelView);
-        super.onViewCreated(view, savedInstanceState);
+    public void onDestroyView() {
+        if (mvvmModelView != null){
+            hideLoading();
+            mvvmModelView.detachView();
+        }
+        super.onDestroyView();
     }
 
     protected abstract M createModelView();
     protected abstract int getIDVariableBinding();
     protected abstract void setupObserveModelView(M mvvmModelView);
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (mvvmModelView != null){
-            hideLoading();
-            mvvmModelView.detachView();
-        }
-    }
-
     private void setupObserveModelViewBase(){
-        mvvmModelView.getOnLoadAPIFail().observe(this, throwable -> loadAPIFail(throwable));
+        mvvmModelView.getOnLoadAPIFail().observe(this, msg -> loadAPIFail(msg));
 
-        mvvmModelView.getOnLoadAPIError().observe(this, msg -> loadAPIError(msg));
+        mvvmModelView.getOnLoadAPIError().observe(this, throwable -> loadAPIError(throwable));
 
         mvvmModelView.getOnShowLoading().observe(this, isShow -> {
             if(isShow) showLoading(); else hideLoading();

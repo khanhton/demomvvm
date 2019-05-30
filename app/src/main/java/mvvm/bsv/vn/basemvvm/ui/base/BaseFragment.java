@@ -97,14 +97,14 @@ public abstract class BaseFragment  extends Fragment {
         }
     }
 
-    public void loadAPIFail(Throwable throwable) {
-        LogUtil.log(throwable.getMessage());
-        showSnackbar(throwable.getMessage());
-    }
-
-    public void loadAPIError(String message) {
+    public void loadAPIFail(String message) {
         LogUtil.log(message);
         showSnackbar(message);
+    }
+
+    public void loadAPIError(Throwable throwable) {
+        LogUtil.log(throwable.getMessage());
+        showSnackbar(throwable.getMessage());
     }
 
     public void showSnackbar(String message){
