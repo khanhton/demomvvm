@@ -1,4 +1,4 @@
-package mvvm.bsv.vn.basemvvm.ui;
+package mvvm.bsv.vn.basemvvm.ui.login;
 
 import android.os.Bundle;
 import android.view.View;
@@ -8,9 +8,10 @@ import android.widget.Toast;
 import butterknife.BindView;
 import mvvm.bsv.vn.basemvvm.BR;
 import mvvm.bsv.vn.basemvvm.R;
-import mvvm.bsv.vn.basemvvm.modelview.LoginModelView;
+import mvvm.bsv.vn.basemvvm.ui.main.MainTabHostFragment;
+import mvvm.bsv.vn.basemvvm.ui.base.BaseMVVMFragment;
 
-public class LoginFragment extends BaseMVVMFragment<LoginModelView>{
+public class LoginFragment extends BaseMVVMFragment<LoginModelView> {
 
     @BindView(R.id.tvTitle)
     TextView tvTitle;
@@ -38,7 +39,7 @@ public class LoginFragment extends BaseMVVMFragment<LoginModelView>{
     protected void setupObserveModelView(LoginModelView mvvmModelView) {
         mvvmModelView.getOnLoginSuccessed().observe(this, s -> {
                 Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
-                mMainActivity.replaceFragment(MainTabHostFragment.newInstance());
+                mMainActivity.replaceFragment(MainTabHostFragment.newInstance(), true);
             }
         );
 

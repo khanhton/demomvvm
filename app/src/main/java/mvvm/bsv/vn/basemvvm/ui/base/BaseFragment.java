@@ -1,4 +1,4 @@
-package mvvm.bsv.vn.basemvvm.ui;
+package mvvm.bsv.vn.basemvvm.ui.base;
 
 import android.os.Bundle;
 import android.support.annotation.LayoutRes;
@@ -8,13 +8,17 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.kaopiz.kprogresshud.KProgressHUD;
+
 import butterknife.ButterKnife;
-import mvvm.bsv.vn.basemvvm.MainActivity;
+import mvvm.bsv.vn.basemvvm.ui.MainActivity;
 import mvvm.bsv.vn.basemvvm.utils.LogUtil;
 
 public abstract class BaseFragment  extends Fragment {
 
     protected MainActivity mMainActivity;
+    private KProgressHUD kProgressHUD;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -74,11 +78,23 @@ public abstract class BaseFragment  extends Fragment {
     }
 
     public void hideLoading() {
-        LogUtil.log("hideLoading");
+        if(kProgressHUD != null && kProgressHUD.isShowing() && isAdded()){
+            kProgressHUD.dismiss();
+        }
     }
 
     public void showLoading() {
-        LogUtil.log("showLoading");
+        if(kProgressHUD == null){
+            kProgressHUD = KProgressHUD.create(mMainActivity)
+                    .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
+                    .setCancellable(true)
+                    .setAnimationSpeed(2)
+                    .setDimAmount(0.5f);
+
+        }
+        if(!kProgressHUD.isShowing() && isAdded()){
+            kProgressHUD.show();
+        }
     }
 
     public void loadAPIFail(Throwable throwable) {

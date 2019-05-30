@@ -1,4 +1,4 @@
-package mvvm.bsv.vn.basemvvm.modelview;
+package mvvm.bsv.vn.basemvvm.ui.base;
 
 import android.databinding.BaseObservable;
 
@@ -12,7 +12,7 @@ import mvvm.bsv.vn.basemvvm.rx.SingleLiveEvent;
 public abstract class BaseModelView   extends BaseObservable {
     private CompositeDisposable mCompositeDisposable;
 
-    protected final SingleLiveEvent<Boolean> showLoadingEvent = new SingleLiveEvent<>();
+    protected final SingleLiveEvent<Boolean> onShowLoading = new SingleLiveEvent<>();
     protected final SingleLiveEvent<Throwable> onLoadAPIFail = new SingleLiveEvent<>();
     protected final SingleLiveEvent<String> onLoadAPIError = new SingleLiveEvent<>();
     protected final SingleLiveEvent<Integer> onSentMessage = new SingleLiveEvent<>();
@@ -27,15 +27,15 @@ public abstract class BaseModelView   extends BaseObservable {
     }
 
     public void hideLoading(){
-        showLoadingEvent.setValue(false);
+        onShowLoading.setValue(false);
     }
 
     public void showLoading(){
-        showLoadingEvent.setValue(true);
+        onShowLoading.setValue(true);
     }
 
-    public SingleLiveEvent<Boolean> getShowLoadingEvent() {
-        return showLoadingEvent;
+    public SingleLiveEvent<Boolean> getOnShowLoading() {
+        return onShowLoading;
     }
 
     public SingleLiveEvent<Throwable> getOnLoadAPIFail() {
@@ -54,7 +54,7 @@ public abstract class BaseModelView   extends BaseObservable {
         onUnsubscribe();
     }
 
-    //RXjava取消注册，以避免内存泄露
+    //RXjava
     public void onUnsubscribe() {
         if (mCompositeDisposable != null && mCompositeDisposable.size() > 0) {
             mCompositeDisposable.clear();

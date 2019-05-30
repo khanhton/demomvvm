@@ -1,8 +1,9 @@
-package mvvm.bsv.vn.basemvvm.ui;
+package mvvm.bsv.vn.basemvvm.ui.main;
 
 import android.os.Bundle;
 import android.view.View;
 import mvvm.bsv.vn.basemvvm.R;
+import mvvm.bsv.vn.basemvvm.ui.base.BaseFragment;
 
 /**
  * Created by Khanh Ton on 2019-05-28.

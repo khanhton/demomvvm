@@ -1,7 +1,7 @@
 package mvvm.bsv.vn.basemvvm.api;
 
 import io.reactivex.Observable;
-import mvvm.bsv.vn.basemvvm.models.LoginResponse;
+import mvvm.bsv.vn.basemvvm.model.LoginResponse;
 
 /**
  * Created by tonkhanh on 11/6/18.

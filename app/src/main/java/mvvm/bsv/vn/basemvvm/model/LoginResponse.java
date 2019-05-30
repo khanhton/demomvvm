@@ -1,4 +1,4 @@
-package mvvm.bsv.vn.basemvvm.models;
+package mvvm.bsv.vn.basemvvm.model;
 
 import com.google.gson.annotations.SerializedName;
 

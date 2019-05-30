@@ -1,10 +1,8 @@
-package mvvm.bsv.vn.basemvvm.ui;
+package mvvm.bsv.vn.basemvvm.ui.base;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.view.View;
-
-import mvvm.bsv.vn.basemvvm.modelview.BaseModelView;
 
 public abstract class BaseMVVMFragment <M extends BaseModelView> extends BaseFragment{
     protected M mvvmModelView;
@@ -41,7 +39,7 @@ public abstract class BaseMVVMFragment <M extends BaseModelView> extends BaseFra
 
         mvvmModelView.getOnLoadAPIError().observe(this, msg -> loadAPIError(msg));
 
-        mvvmModelView.getShowLoadingEvent().observe(this, isShow -> {
+        mvvmModelView.getOnShowLoading().observe(this, isShow -> {
             if(isShow) showLoading(); else hideLoading();
         });
     }

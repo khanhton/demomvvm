@@ -1,11 +1,12 @@
-package mvvm.bsv.vn.basemvvm.modelview;
+package mvvm.bsv.vn.basemvvm.ui.login;
 
 import android.databinding.ObservableField;
 
 import mvvm.bsv.vn.basemvvm.api.DataManager;
-import mvvm.bsv.vn.basemvvm.models.LoginResponse;
-import mvvm.bsv.vn.basemvvm.models.User;
+import mvvm.bsv.vn.basemvvm.model.LoginResponse;
+import mvvm.bsv.vn.basemvvm.model.User;
 import mvvm.bsv.vn.basemvvm.rx.SingleLiveEvent;
+import mvvm.bsv.vn.basemvvm.ui.base.BaseModelView;
 import mvvm.bsv.vn.basemvvm.utils.StringUtil;
 
 public class LoginModelView extends BaseModelView {

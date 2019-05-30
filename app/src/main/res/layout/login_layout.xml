@@ -5,7 +5,7 @@
         <import type="android.view.View"/>
         <variable
             name="vm"
-            type="mvvm.bsv.vn.basemvvm.modelview.LoginModelView"/>
+            type="mvvm.bsv.vn.basemvvm.ui.login.LoginModelView"/>
     </data>
     <LinearLayout
         android:layout_width="match_parent"

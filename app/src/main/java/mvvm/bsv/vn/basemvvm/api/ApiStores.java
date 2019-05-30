@@ -1,7 +1,7 @@
 package mvvm.bsv.vn.basemvvm.api;
 
 import io.reactivex.Observable;
-import mvvm.bsv.vn.basemvvm.models.LoginResponse;
+import mvvm.bsv.vn.basemvvm.model.LoginResponse;
 import retrofit2.http.GET;
 
 /**

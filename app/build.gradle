@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
+    flavorDimensions "default"
     compileSdkVersion 28
     defaultConfig {
         applicationId "mvvm.bsv.vn.basemvvm"
@@ -25,6 +26,35 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+    }
+
+    productFlavors {
+        dev {
+            applicationId "mvvm.bsv.vn.basemvvm"
+            manifestPlaceholders = [appname: 'MVVM Dev']
+        }
+        prod {
+            applicationId "mvvm.bsv.vn.basemvvm"
+            manifestPlaceholders = [appname: 'MVVM Prod']
+        }
+    }
+    applicationVariants.all { variant ->
+
+        if (variant.getName().contains("dev")) {
+            renameAPK(variant, 'App', 'Dev', variant.versionCode)
+        }
+        if (variant.getName().contains("prod")) {
+            renameAPK(variant,'App','Prod',variant.versionCode)
+        }
+
+    }
+}
+
+static def renameAPK(variant, app_name, env, ver) {
+    def formattedDate = new Date().format('yyyyMMdd')
+    def fileName = app_name + "_" + env + "_" + formattedDate + ".apk"
+    variant.outputs.all {
+        outputFileName = fileName
     }
 }
 
@@ -53,4 +83,7 @@ dependencies {
 
     implementation 'com.jakewharton:butterknife:9.0.0-rc1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:9.0.0-rc1'
+
+    //loadding
+    implementation 'com.kaopiz:kprogresshud:1.2.0'
 }
