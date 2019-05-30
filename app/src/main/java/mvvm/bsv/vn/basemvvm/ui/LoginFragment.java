@@ -1,8 +1,6 @@
 package mvvm.bsv.vn.basemvvm.ui;
 
-import android.arch.lifecycle.Observer;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -38,13 +36,11 @@ public class LoginFragment extends BaseMVVMFragment<LoginModelView>{
 
     @Override
     protected void setupObserveModelView(LoginModelView mvvmModelView) {
-        mvvmModelView.getOnLoginSuccessed().observe(this, new Observer<String>() {
-            @Override
-            public void onChanged(@Nullable String s) {
+        mvvmModelView.getOnLoginSuccessed().observe(this, s -> {
                 Toast.makeText(getContext(), s, Toast.LENGTH_SHORT).show();
                 mMainActivity.replaceFragment(MainTabHostFragment.newInstance());
             }
-        });
+        );
 
     }
 

@@ -1,6 +1,7 @@
 package mvvm.bsv.vn.basemvvm.ui;
 
 import android.os.Bundle;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -36,7 +37,12 @@ public abstract class BaseFragment  extends Fragment {
 
     protected abstract void init(View view);
 
-    public abstract int getRootLayout();
+    /**
+     *
+     * @return layout resource id
+     */
+    public abstract  @LayoutRes
+    int getRootLayout();
 
     public void setupActionBar() {
     }
