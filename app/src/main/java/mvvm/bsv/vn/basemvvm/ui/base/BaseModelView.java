@@ -65,16 +65,6 @@ public abstract class BaseModelView extends BaseObservable {
         }
     }
 
-    public void addSubscription(Observable observable, Consumer success, Consumer<Throwable> throwable) {
-        if (mCompositeDisposable == null) {
-            mCompositeDisposable = new CompositeDisposable();
-        }
-        mCompositeDisposable.add(observable
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(success, throwable)
-        );
-    }
     public void addSubscription(Observable observable,  ApiConsumer response ){
         if (mCompositeDisposable == null) {
             mCompositeDisposable = new CompositeDisposable();
