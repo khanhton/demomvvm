@@ -11,6 +11,7 @@ import mvvm.bsv.vn.basemvvm.model.LoginResponse;
 import mvvm.bsv.vn.basemvvm.rx.ApiConsumer;
 import mvvm.bsv.vn.basemvvm.rx.SingleLiveEvent;
 import mvvm.bsv.vn.basemvvm.utils.LogUtil;
+import mvvm.bsv.vn.basemvvm.utils.Utils;
 
 public abstract class BaseModelView extends BaseObservable {
     private CompositeDisposable mCompositeDisposable;
@@ -77,11 +78,9 @@ public abstract class BaseModelView extends BaseObservable {
                         success -> {
                             response.onLoading(false);
                             response.onSuccess(success);
+
                         },
-                        throwable ->{
-                            response.onLoading(false);
-                            response.onFailure((Throwable) throwable);
-                        })
+                        throwable -> response.onFailure((Throwable) throwable))
         );
     };
 }

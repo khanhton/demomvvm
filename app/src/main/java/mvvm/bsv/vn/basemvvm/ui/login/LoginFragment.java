@@ -10,6 +10,8 @@ import mvvm.bsv.vn.basemvvm.BR;
 import mvvm.bsv.vn.basemvvm.R;
 import mvvm.bsv.vn.basemvvm.ui.main.MainTabHostFragment;
 import mvvm.bsv.vn.basemvvm.ui.base.BaseMVVMFragment;
+import mvvm.bsv.vn.basemvvm.utils.MathUtils;
+import mvvm.bsv.vn.basemvvm.utils.Utils;
 
 public class LoginFragment extends BaseMVVMFragment<LoginModelView> {
 
@@ -50,6 +52,9 @@ public class LoginFragment extends BaseMVVMFragment<LoginModelView> {
     protected void init(View view) {
         tvTitle.setText("MVVM");
         mvvmModelView.username.set("xyz");
+        int sum = Utils.doAction(3,6, MathUtils::sum);
+
+
     }
 
     @Override
